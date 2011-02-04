@@ -16,11 +16,20 @@ class ImagineExtension extends Extension
         'imagine' => 'imagine.xml'
     );
 
-    public function imagineLoad($config, ContainerBuilder $container)
+    public function configLoad(array $configs, ContainerBuilder $container)
+    {
+        $mergedConfig = array();
+        foreach ($configs as $config) {
+            $mergedConfig = array_merge($mergedConfig, $config);
+        }
+        $this->doConfigLoad($mergedConfig, $container);
+    }
+
+    public function doConfigLoad(array $config, ContainerBuilder $container)
     {
         $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
         $loader->load($this->resources['imagine']);
-        
+
         $config = (array) $config;
         foreach ($config as $processorName => $config)
         {
