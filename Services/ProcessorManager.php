@@ -6,16 +6,19 @@ use Symfony\Component\DependencyInjection\Container;
 
 class ProcessorManager
 {
-    protected $container;
+    protected $processors = array();
 
-    public function __construct(Container $container)
+    public function addProcessor($name, $processor)
     {
-        $this->container = $container;
+        $this->processors[$name] = $processor;
     }
 
     public function getProcessor($name)
     {
-        $serviceName = 'imagine.processor.' . $name;
-        return $this->container->get($serviceName);
+        if(!isset($this->processors[$name])) {
+            throw new \InvalidArgumentException(sprintf('Processor "%s" does not exist. Available processors are %s', $name, implode(', ', array_keys($this->processors))));
+        }
+
+        return $this->processors[$name];
     }
 }

@@ -30,19 +30,25 @@ class ImagineExtension extends Extension
         $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
         $loader->load($this->resources['imagine']);
 
-        $config = (array) $config;
-        foreach ($config as $processorName => $config)
-        {
-            $commands = isset ($config['commands']) ? $config['commands'] : array();
-            $processDef = new Definition('Imagine\Processor');
-            foreach ($commands as $command)
-            {
-                if ( ! isset ($command['name'])) {
-                    throw new \LogicException('Command doesn\'t have a name, check your app configuration');
-                }
-                $processDef->addMethodCall($command['name'], (array)$command['arguments']);
+        foreach ($config as $processorName => $processorConfig) {
+            $this->createProcessor($container, $processorName, $processorConfig);
+        }
+    }
+
+    protected function createProcessor(ContainerBuilder $container, $name, array $config)
+    {
+        $processorId = sprintf('imagine.processor.%s', $name);
+        $processor = $container
+            ->register($processorId, '%imagine.processor_class%')
+            ->setPublic(false)
+            ->addTag('imagine.processor', array('alias' => $name));
+
+        $commands = isset ($config['commands']) ? $config['commands'] : array();
+        foreach ($commands as $command) {
+            if ( ! isset ($command['name'])) {
+                throw new \LogicException('Command doesn\'t have a name, check your app configuration');
             }
-            $container->setDefinition('imagine.processor.' . $processorName, $processDef);
+            $processor->addMethodCall($command['name'], (array)$command['arguments']);
         }
     }
 
