@@ -6,7 +6,7 @@ Bundle that will provide image manipulation functionality to your Symfony 2 base
 
 Define your processors in the yaml configuration for your application like so:
 
-    imagine.imagine:
+    imagine.config:
       thumbnail:
         commands:
           - { name: save, arguments: '/web/uploads/%user_id%/images/' }
@@ -23,9 +23,7 @@ bottom to 50px height, and resave the image in '/uploads/thumbs' directory.
 
 To use the processor in the application, you would do something like:
 
-    $processor = $this->container->get('imagine.processor.thumbnail');
-    //or...
-    $processor = $this->container->getImagineManagerService()->getProcessor('thumbnail');
+    $processor = $this->container->get('imagine.manager')->getProcessor('thumbnail');
 
 And the usual:
 
