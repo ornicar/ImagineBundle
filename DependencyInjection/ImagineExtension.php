@@ -4,6 +4,7 @@ namespace Bundle\ImagineBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\Extension\Extension,
     Symfony\Component\DependencyInjection\ContainerBuilder,
+    Symfony\Component\DependencyInjection\Loader\FileLocator,
     Symfony\Component\DependencyInjection\Definition,
     Symfony\Component\DependencyInjection\Reference,
     Symfony\Component\DependencyInjection\Container,
@@ -27,7 +28,7 @@ class ImagineExtension extends Extension
 
     public function doConfigLoad(array $config, ContainerBuilder $container)
     {
-        $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load($this->resources['imagine']);
 
         foreach ($config as $processorName => $processorConfig) {
