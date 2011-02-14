@@ -4,7 +4,7 @@ namespace Bundle\ImagineBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\Extension\Extension,
     Symfony\Component\DependencyInjection\ContainerBuilder,
-    Symfony\Component\DependencyInjection\Loader\FileLocator,
+    Symfony\Component\Config\FileLocator,
     Symfony\Component\DependencyInjection\Definition,
     Symfony\Component\DependencyInjection\Reference,
     Symfony\Component\DependencyInjection\Container,
