@@ -17,7 +17,7 @@ class ImagineExtension extends Extension
         'imagine' => 'imagine.xml'
     );
 
-    public function configLoad(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container)
     {
         $mergedConfig = array();
         foreach ($configs as $config) {
