@@ -8,9 +8,9 @@ use Symfony\Component\HttpKernel\Bundle\Bundle as BaseBundle;
 
 class ImagineBundle extends BaseBundle
 {
-    public function registerExtensions(ContainerBuilder $container)
+    public function build(ContainerBuilder $container)
     {
-        parent::registerExtensions($container);
+        parent::build($container);
         $container->addCompilerPass(new ImaginePass());
     }
 
