@@ -60,7 +60,7 @@ class ImagineExtension extends Extension
      */
     public function getNamespace()
     {
-        return 'http://www.symfony-project.org/schema/dic/symfony';
+        return 'http://symfony.com/schema/dic/symfony';
     }
 
     /**
