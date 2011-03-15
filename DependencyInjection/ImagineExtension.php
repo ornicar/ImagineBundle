@@ -2,7 +2,7 @@
 
 namespace Bundle\ImagineBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\Extension\Extension,
+use Symfony\Component\HttpKernel\DependencyInjection\Extension,
     Symfony\Component\DependencyInjection\ContainerBuilder,
     Symfony\Component\Config\FileLocator,
     Symfony\Component\DependencyInjection\Definition,
